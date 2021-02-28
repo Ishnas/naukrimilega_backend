@@ -1,0 +1,39 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 18000
+
+  adminConnectors:
+    - type: http
+      port: 18001
+
+  requestLog:
+    type: classic
+    timeZone: IST
+    appenders:
+      - type: file
+        currentLogFilename: logs/requests.log
+        archive: true
+        archivedLogFilenamePattern: logs/requests-%i.log.gz
+        archivedFileCount: 10
+        maxFileSize: 100MB
+        bufferSize: 256KB
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
+      logFormat: "\n%date %level [%thread] %logger{0} [%X{id}] %msg%n"
+    - type: file
+      threshold: ALL
+      timeZone: IST
+      logFormat: "%date %level [%thread] %logger{0} [%X{id}] %msg%n"
+      currentLogFilename: logs/data-manager.log
+      archive: true
+      archivedLogFilenamePattern: logs/data-manager-%i.log.gz
+      archivedFileCount: 10
+      maxFileSize: 500MB
+      bufferSize: 256KB
+
+swagger:
+  resourcePackage: "com.naukrimilega.facade"
