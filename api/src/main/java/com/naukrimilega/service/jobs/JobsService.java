@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.naukrimilega.dao.JobsDAO;
 import com.naukrimilega.models.JobDetails;
-import com.naukrimilega.models.query.JobByType;
+import com.naukrimilega.models.query.Category;
 import com.naukrimilega.models.query.QueryData;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,13 +37,13 @@ public class JobsService {
      * @return List(JobDetails)
      */
 
-    public List<JobDetails> fetchJobsResponse(JobByType jobByType, String typeValue) throws Exception {
+    public List<JobDetails> fetchJobsResponse(Category category, String typeValue) throws Exception {
         String nodeName = deriveNodeName();
-        switch (jobByType) {
-            case DATE: return jobsDAO.fetchJobsBy(nodeName, jobByType, Long.parseLong(typeValue));
+        switch (category) {
+            case DATE: return jobsDAO.fetchJobsBy(nodeName, category, Long.parseLong(typeValue));
             case STATE:
             case TAG_FRESHERS:
-            case TAG_GOVT_JOBS: return jobsDAO.fetchJobsBy(nodeName, jobByType, typeValue);
+            case TAG_GOVT_JOBS: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
             default: throw new RuntimeException("Not supported fetchJobsResponse()");
         }
     }

@@ -7,7 +7,7 @@ import com.naukrimilega.firebaseutil.model.FilterByType;
 import com.naukrimilega.firebaseutil.model.FilterParam;
 import com.naukrimilega.firebaseutil.service.IDatabaseService;
 import com.naukrimilega.models.JobDetails;
-import com.naukrimilega.models.query.JobByType;
+import com.naukrimilega.models.query.Category;
 import com.naukrimilega.utils.DBConstants;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class JobsDAO {
         return true;
     }
 
-    public List<JobDetails> fetchJobsBy(String nodeName, JobByType type, Object typeValue) throws Exception {
+    public List<JobDetails> fetchJobsBy(String nodeName, Category type, Object typeValue) throws Exception {
         Map<FilterParam, Object> qMap = prepareParamMapFrom(type);
         return getResultList(nodeName, qMap);
     }
@@ -57,9 +57,9 @@ public class JobsDAO {
         return jobDetailsList;
     }
 
-    private Map<FilterParam, Object> prepareParamMapFrom(JobByType jobByType) throws Exception {
+    private Map<FilterParam, Object> prepareParamMapFrom(Category category) throws Exception {
         Map<FilterParam, Object> qMap = new HashMap<>();
-        switch (jobByType) {
+        switch (category) {
             case DATE: qMap.put(FilterParam.CHILD, DBConstants.FIELD_PUBLISHED_ON); break;
             case STATE: qMap.put(FilterParam.CHILD, DBConstants.FIELD_STATE); break;
             case TAG_FRESHERS: qMap.put(FilterParam.CHILD, DBConstants.FIELD_TAG_FRESHERS); break;

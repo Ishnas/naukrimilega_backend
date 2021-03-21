@@ -2,7 +2,7 @@ package com.naukrimilega.facade;
 
 import com.google.inject.Inject;
 import com.naukrimilega.models.JobDetails;
-import com.naukrimilega.models.query.JobByType;
+import com.naukrimilega.models.query.Category;
 import com.naukrimilega.models.query.QueryData;
 import com.naukrimilega.service.jobs.JobsService;
 import io.swagger.annotations.Api;
@@ -30,11 +30,11 @@ public class JobsFacade {
         return jobsService.addJobDetails(jobDetails);
     }
 
-    @Path("/{jobType}/{value}")
+    @Path("/{category}/{value}")
     @ApiOperation("This API will take the job type and return data for that")
     @GET
-    public List<JobDetails> fetchJobsBy(@PathParam("jobType") JobByType jobByType, @PathParam("value") String value) throws Exception {
-        return jobsService.fetchJobsResponse(jobByType, value);
+    public List<JobDetails> fetchJobsBy(@PathParam("category") String category, @PathParam("value") String value) throws Exception {
+        return jobsService.fetchJobsResponse(Category.getCategoryEnum(category), value);
     }
 
     @Path("/{jobType}")

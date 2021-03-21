@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class QueryData {
-    private JobByType jobByType;
+    private Category category;
     private Object value;
 }
