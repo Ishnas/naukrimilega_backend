@@ -2,6 +2,7 @@ package com.naukrimilega;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.naukrimilega.facade.UserFacade;
 import com.naukrimilega.firebaseutil.InitializeFirebase;
 import com.naukrimilega.configs.DataManagerConfigs;
 import com.naukrimilega.facade.JobsFacade;
@@ -51,7 +52,7 @@ public class DataManagerApplication extends Application<DataManagerConfigs> {
         registerResources(environment, injector);
         environment.healthChecks().register("health", new AppHealthCheck());
 
-        String serviceAccFilePath = "/Users/santanu.naskar/IdeaProjects/data-manager/api/src/main/resources/naukrimilega-32e0e.json";
+        String serviceAccFilePath = "/Users/santanu/IdeaProjects/data-manager/api/src/main/resources/naukrimilega-32e0e.json";
         String dbUrl = "https://naukrimilega-32e0e-default-rtdb.firebaseio.com/";
         InitializeFirebase.initialize(serviceAccFilePath, dbUrl);
 
@@ -59,5 +60,6 @@ public class DataManagerApplication extends Application<DataManagerConfigs> {
 
     private void registerResources(Environment environment, Injector injector) {
         environment.jersey().register(injector.getInstance(JobsFacade.class));
+        environment.jersey().register(injector.getInstance(UserFacade.class));
     }
 }
