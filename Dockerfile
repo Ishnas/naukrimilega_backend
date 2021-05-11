@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM java:8-jdk
 WORKDIR "/app"
 COPY run.sh .
 COPY api/target/api-*.jar app.jar
