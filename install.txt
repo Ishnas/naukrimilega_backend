@@ -1,0 +1,9 @@
+# Copies the jar to EC2 server
+sudo scp -i Downloads/engineersdenkp.pem /Users/santanu/IdeaProjects/data-manager/api/target/api-1.0-SNAPSHOT.jar Downloads/engineersdenkp.pem admin@35.154.179.108:
+Likewise copy config.yaml & credential json file
+
+# login to ec2 serevr
+sudo ssh -i engineersdenkp.pem admin@35.154.179.108
+
+# Run the jar to start the java application
+java -jar api-1.0-SNAPSHOT.jar server config.yaml
