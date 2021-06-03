@@ -23,13 +23,13 @@
     <distributionManagement>
         <repository>
             <id>repsy</id>
-            <url>https://repo.repsy.io/mvn/complexgene/default</url>
+            <url>https://repo.repsy.io/mvn/complexgene/artifacts</url>
         </repository>
     </distributionManagement>
     <repositories>
         <repository>
             <id>repsy</id>
-            <url>https://repo.repsy.io/mvn/complexgene/default</url>
+            <url>https://repo.repsy.io/mvn/complexgene/artifacts</url>
         </repository>
     </repositories>
 
