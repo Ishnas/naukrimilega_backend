@@ -1,3 +1,4 @@
+# Currently NOT being used
 FROM java:8-jdk
 WORKDIR "/app"
 COPY run.sh .
