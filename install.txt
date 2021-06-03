@@ -1,9 +1,14 @@
-# Copies the jar to EC2 server
-sudo scp -i Downloads/engineersdenkp.pem /Users/santanu/IdeaProjects/data-manager/api/target/api-1.0-SNAPSHOT.jar Downloads/engineersdenkp.pem admin@35.154.179.108:
-Likewise copy config.yaml & credential json file
+#Incase you change anything in the firebaseutil package you need to push it to repsy repo.
+Just make the changes in firebasutil project, test it using mvn clean install locally and once done do
+mvn deploy to push it to repsy so that other projects can use it.
 
-# login to ec2 serevr
-sudo ssh -i engineersdenkp.pem admin@35.154.179.108
+# Procfile is the one which will run on heroku
+ web command creates a single process and runs the command written after that.
+
+# Heroku anyways is listening to master through hooks and will trigger a build as soon as any change is pushed
+into master
+
+# heroku local can eb used to check if the app is starting locally
 
 # Run the jar to start the java application
-java -jar api-1.0-SNAPSHOT.jar server config.yaml
+web:java -Ddw.server.applicationConnectors[0].port=18000 -jar api-1.0-SNAPSHOT.jar server config.yaml

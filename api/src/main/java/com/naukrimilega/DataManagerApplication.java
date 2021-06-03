@@ -52,9 +52,8 @@ public class DataManagerApplication extends Application<DataManagerConfigs> {
         registerResources(environment, injector);
         environment.healthChecks().register("health", new AppHealthCheck());
 
-        String serviceAccFilePath = "naukrimilega-32e0e.json";
         String dbUrl = "https://naukrimilega-32e0e-default-rtdb.firebaseio.com/";
-        InitializeFirebase.initialize(serviceAccFilePath, dbUrl);
+        InitializeFirebase.initialize(null, dbUrl);
 
     }
 
