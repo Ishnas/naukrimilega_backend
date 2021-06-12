@@ -8,8 +8,6 @@ import com.naukrimilega.firebaseutil.model.FilterParam;
 import com.naukrimilega.firebaseutil.service.IDatabaseService;
 import com.naukrimilega.models.JobDetails;
 import com.naukrimilega.models.query.Category;
-import com.naukrimilega.utils.DBConstants;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +39,8 @@ public class JobsDAO {
         return true;
     }
 
-    public List<JobDetails> fetchJobsBy(String nodeName, Category type, Object typeValue) throws Exception {
-        Map<FilterParam, Object> qMap = prepareParamMapFrom(type);
+    public List<JobDetails> fetchJobsBy(String nodeName, Category type, String typeValue) throws Exception {
+        Map<FilterParam, Object> qMap = prepareParamMapFrom(type, typeValue);
         return getResultList(nodeName, qMap);
     }
 
@@ -57,16 +55,37 @@ public class JobsDAO {
         return jobDetailsList;
     }
 
-    private Map<FilterParam, Object> prepareParamMapFrom(Category category) throws Exception {
+    private Map<FilterParam, Object> prepareParamMapFrom(Category category, String categoryValue) throws Exception {
         Map<FilterParam, Object> qMap = new HashMap<>();
-        switch (category) {
-            case DATE: qMap.put(FilterParam.CHILD, DBConstants.FIELD_PUBLISHED_ON); break;
-            case STATE: qMap.put(FilterParam.CHILD, DBConstants.FIELD_STATE); break;
-            case TAG_FRESHERS: qMap.put(FilterParam.CHILD, DBConstants.FIELD_TAG_FRESHERS); break;
-            case TAG_GOVT_JOBS: qMap.put(FilterParam.CHILD, DBConstants.FIELD_TAG_GOVT_JOBS); break;
-            default: throw new Exception("Not supported yet");
-        }
+
+        if(category==Category.CATEGORY || category==Category.CITY || category==Category.DATE || category==Category.DESIGNATION ||
+            category==Category.EDUCATION || category==Category.ENGINEERINGSTREAMS || category==Category.STATE ||
+            category==Category.TAG_FRESHERS || category==Category.TAG_GOVT_JOBS || category==Category.TOPCOMPANIES){
+
+            String categoryVal = category.getActualValue();
+
+            qMap.put(FilterParam.CHILD, categoryVal);
+            qMap.put(FilterParam.START_AT, categoryValue);
+        }else
+            throw new Exception("Not supported yet");
+
+//        switch (category) {
+//            case DATE: qMap.put(FilterParam.CHILD, DBConstants.PUBLISHED_ON); break;
+//            case STATE: qMap.put(FilterParam.CHILD, DBConstants.STATE);
+//                        qMap.put(FilterParam.EQUAL_TO, categoryValue);
+//                        break;
+//            case CATEGORY: qMap.put(FilterParam.CHILD, DBConstants.CATEGORY);
+//                           qMap.put(FilterParam.EQUAL_TO, categoryValue);
+//                           break;
+//            case CITY: qMap.put(FilterParam.CHILD, DBConstants.CITY); break;
+//            case DESIGNATION : qMap.put(FilterParam.CHILD, DBConstants.DESIGNATION); break;
+//            case EDUCATION: qMap.put(FilterParam.CHILD, DBConstants.EDUCATION); break;
+//            case TOPCOMPANIES: qMap.put(FilterParam.CHILD, DBConstants.TOPCOMPANIES); break;
+//            case ENGINEERINGSTREAMS: qMap.put(FilterParam.CHILD, DBConstants.ENGINEERINGSTREAMS); break;
+//            case TAG_FRESHERS: qMap.put(FilterParam.CHILD, DBConstants.TAG_FRESHERS); break;
+//            case TAG_GOVT_JOBS: qMap.put(FilterParam.CHILD, DBConstants.TAG_GOVT_JOBS); break;
+//            default: throw new Exception("Not supported yet");
+//        }
         return qMap;
     }
-
 }

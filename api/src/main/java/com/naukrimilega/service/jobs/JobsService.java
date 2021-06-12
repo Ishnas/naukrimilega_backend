@@ -6,18 +6,19 @@ import com.naukrimilega.dao.JobsDAO;
 import com.naukrimilega.models.JobDetails;
 import com.naukrimilega.models.query.Category;
 import com.naukrimilega.models.query.QueryData;
-import lombok.extern.slf4j.Slf4j;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 
 @Singleton
 @Slf4j
 public class JobsService {
+
     private final JobsDAO jobsDAO;
     @Inject
     public JobsService(JobsDAO jobsDAO) {
+
         this.jobsDAO = jobsDAO;
     }
 
@@ -27,7 +28,7 @@ public class JobsService {
      * @return Boolean
      */
     public Boolean addJobDetails(JobDetails jobDetails) {
-        String nodeName = deriveNodeName();
+        String nodeName = deriveJobsNodeName();
         jobDetails.setJobId(generateRandomStringForId());
         return jobsDAO.addJob(nodeName, jobDetails);
     }
@@ -38,14 +39,23 @@ public class JobsService {
      */
 
     public List<JobDetails> fetchJobsResponse(Category category, String typeValue) throws Exception {
-        String nodeName = deriveNodeName();
-        switch (category) {
-            case DATE: return jobsDAO.fetchJobsBy(nodeName, category, Long.parseLong(typeValue));
-            case STATE:
-            case TAG_FRESHERS:
-            case TAG_GOVT_JOBS: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
-            default: throw new RuntimeException("Not supported fetchJobsResponse()");
-        }
+        String nodeName = deriveJobsNodeName();
+
+        if(category==Category.CATEGORY || category==Category.CITY || category==Category.DATE || category==Category.DESIGNATION ||
+            category==Category.EDUCATION || category==Category.ENGINEERINGSTREAMS || category==Category.STATE ||
+            category==Category.TAG_FRESHERS || category==Category.TAG_GOVT_JOBS || category==Category.TOPCOMPANIES){
+
+            return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
+        }else
+            throw new RuntimeException("Not supported fetchJobsResponse()");
+
+//        switch (category) {
+//            case DATE: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
+//            case STATE: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
+//            case TAG_FRESHERS: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
+//            case TAG_GOVT_JOBS: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
+//            default: throw new RuntimeException("Not supported fetchJobsResponse()");
+//        }
     }
 
     /**
@@ -55,7 +65,7 @@ public class JobsService {
      */
 
     public Boolean updateJobDetails(JobDetails jobDetails) {
-        String nodeName = deriveNodeName();
+        String nodeName = deriveJobsNodeName();
         jobDetails.setJobId(generateRandomStringForId());
         return jobsDAO.updateJob(nodeName, jobDetails);
     }
@@ -75,7 +85,7 @@ public class JobsService {
         return false;
     }
 
-    private String deriveNodeName() {
+    private String deriveJobsNodeName() {
         return "jobs";
     }
 
