@@ -2,6 +2,7 @@ package com.naukrimilega;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.naukrimilega.facade.MocktestFacade;
 import com.naukrimilega.facade.UserFacade;
 import com.naukrimilega.firebaseutil.InitializeFirebase;
 import com.naukrimilega.configs.DataManagerConfigs;
@@ -59,5 +60,6 @@ public class DataManagerApplication extends Application<DataManagerConfigs> {
     private void registerResources(Environment environment, Injector injector) {
         environment.jersey().register(injector.getInstance(JobsFacade.class));
         environment.jersey().register(injector.getInstance(UserFacade.class));
+        environment.jersey().register(injector.getInstance(MocktestFacade.class));
     }
 }
