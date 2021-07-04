@@ -10,6 +10,7 @@ public class MocktestDetails {
   private String id;
   private String subject;
   private String questionPaper;
+  private String questionNo;
   private String question;
   private String answer;
   private List<OptionDetails> options;

@@ -7,9 +7,8 @@ public class JobDetails {
     private String jobId;
     private String title;
     private String companyLogoUrl;
+    private String companyName;
     private String description;
-    private long publishedOn;
-    private long lastDateOn;
     private String category;
     private String firstTag;
     private String secondTag;
@@ -17,4 +16,12 @@ public class JobDetails {
     private String state;
     private String destination;
     private String education;
+    private String ageProfile;
+    private String experience;
+    private String noOfPosts;
+    private String salary;
+    private String engineeringstreams;
+    private String keySkillsRequired;
+    private String publishedOn;
+    private String lastDateOn;
 }

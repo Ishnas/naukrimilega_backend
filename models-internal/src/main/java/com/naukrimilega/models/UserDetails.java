@@ -23,4 +23,6 @@ public class UserDetails {
     private Date date_of_birth;
 
     private EducationDetails education;
+
+    private ScoreCardDetails scoreCardDetails;
 }

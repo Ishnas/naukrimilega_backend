@@ -30,6 +30,10 @@ public class MocktestService {
     return mocktestDAO.addMocktest(nodeName, mocktestDetails);
   }
 
+  /**
+   * Retrieve a mocktest given
+   * @return List(MocktestDetails)
+   */
   public List<MocktestDetails> fetchMocktestResponse(String subject, String questionpaper) {
     String nodeName = deriveJobsNodeName();
     return mocktestDAO.fetchMocktestBy(nodeName, subject, questionpaper);

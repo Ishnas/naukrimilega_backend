@@ -58,16 +58,10 @@ public class JobsDAO {
     private Map<FilterParam, Object> prepareParamMapFrom(Category category, String categoryValue) throws Exception {
         Map<FilterParam, Object> qMap = new HashMap<>();
 
-        if(category==Category.CATEGORY || category==Category.CITY || category==Category.DATE || category==Category.DESIGNATION ||
-            category==Category.EDUCATION || category==Category.ENGINEERINGSTREAMS || category==Category.STATE ||
-            category==Category.TAG_FRESHERS || category==Category.TAG_GOVT_JOBS || category==Category.TOPCOMPANIES){
+        String categoryVal = category.getActualValue();
 
-            String categoryVal = category.getActualValue();
-
-            qMap.put(FilterParam.CHILD, categoryVal);
-            qMap.put(FilterParam.START_AT, categoryValue);
-        }else
-            throw new Exception("Not supported yet");
+        qMap.put(FilterParam.CHILD, categoryVal);
+        qMap.put(FilterParam.START_AT, categoryValue);
 
 //        switch (category) {
 //            case DATE: qMap.put(FilterParam.CHILD, DBConstants.PUBLISHED_ON); break;

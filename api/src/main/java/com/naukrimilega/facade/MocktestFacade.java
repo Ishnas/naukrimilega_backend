@@ -32,7 +32,7 @@ public class MocktestFacade {
     return mocktestService.addMocktestDetails(mocktestDetails);
   }
 
-  @Path("/{subject}/{questionpaper}")
+  @Path("/{userid}/{subject}/{questionpaper}")
   @ApiOperation("This API will take the mocktest type and return data for that")
   @GET
   public List<MocktestDetails> fetchMocktestBy(@PathParam("subject") String subject, @PathParam("questionpaper") String questionpaper) {
