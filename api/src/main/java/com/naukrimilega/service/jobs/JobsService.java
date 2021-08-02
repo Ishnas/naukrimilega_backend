@@ -43,7 +43,7 @@ public class JobsService {
 
         if(category==Category.CATEGORY || category==Category.CITY || category==Category.DATE || category==Category.DESIGNATION ||
             category==Category.EDUCATION || category==Category.ENGINEERINGSTREAMS || category==Category.STATE ||
-            category==Category.TAG_FRESHERS || category==Category.TAG_GOVT_JOBS || category==Category.TOPCOMPANIES){
+            category==Category.TAG_FRESHERS || category==Category.TAG_GOVT_JOBS || category==Category.TOPCOMPANIES || category==Category.FIRST_TAG || category==Category.SECOND_TAG){
 
             return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
         }else
@@ -91,5 +91,18 @@ public class JobsService {
 
     private String generateRandomStringForId() {
         return UUID.randomUUID().toString() + LocalDateTime.now().toString();
+    }
+
+    public List<JobDetails> fetchJobsResponseByValue(String value) throws Exception {
+        String nodeName = deriveJobsNodeName();
+        List<JobDetails> jobDetails = null;
+
+        if(value!=null) {
+            jobDetails = jobsDAO.fetchJobsBy(nodeName, Category.FIRST_TAG, value);
+        }
+        if(jobDetails==null) {
+            jobDetails = jobsDAO.fetchJobsBy(nodeName, Category.SECOND_TAG, value);
+        }
+        return jobDetails;
     }
 }

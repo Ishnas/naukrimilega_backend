@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.naukrimilega.facade.BannerJobsFacade;
 import com.naukrimilega.facade.DailyJobsFacade;
 import com.naukrimilega.facade.MocktestFacade;
+import com.naukrimilega.facade.NewsPaperJobsFacade;
 import com.naukrimilega.facade.ScoreCardFacade;
 import com.naukrimilega.facade.UserFacade;
 import com.naukrimilega.firebaseutil.InitializeFirebase;
@@ -66,5 +67,7 @@ public class DataManagerApplication extends Application<DataManagerConfigs> {
         environment.jersey().register(injector.getInstance(ScoreCardFacade.class));
         environment.jersey().register(injector.getInstance(DailyJobsFacade.class));
         environment.jersey().register(injector.getInstance(BannerJobsFacade.class));
+        environment.jersey().register(injector.getInstance(NewsPaperJobsFacade.class));
+
     }
 }

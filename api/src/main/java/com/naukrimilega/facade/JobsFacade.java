@@ -8,7 +8,6 @@ import com.naukrimilega.models.query.QueryData;
 import com.naukrimilega.service.jobs.JobsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -38,6 +37,14 @@ public class JobsFacade {
     @Timed
     public List<JobDetails> fetchJobsBy(@PathParam("category") String category, @PathParam("value") String value) throws Exception {
         return jobsService.fetchJobsResponse(Category.getCategoryEnum(category), value);
+    }
+
+    @Path("/{value}")
+    @ApiOperation("This API will take the job type and return data for that")
+    @GET
+    @Timed
+    public List<JobDetails> fetchJobsByValue(@PathParam("value") String value) throws Exception {
+        return jobsService.fetchJobsResponseByValue(value);
     }
 
     @Path("/{jobType}")

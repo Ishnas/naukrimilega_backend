@@ -11,7 +11,10 @@ public enum Category {
     DATE("date"),
     TAG_FRESHERS("freshers"),
     TAG_GOVT_JOBS("govt"),
-    PUBLISHED_ON("publishedon");
+    PUBLISHED_ON("publishedon"),
+    TAG_WALKIN("walkin"),
+    FIRST_TAG("firstTag"),
+    SECOND_TAG("secondTag");
 
     private String actualValue;
 
@@ -34,6 +37,10 @@ public enum Category {
             case "state": return Category.STATE;
             case "date": return Category.DATE;
             case "freshers": return Category.TAG_FRESHERS;
+            case "govt": return Category.TAG_GOVT_JOBS;
+            case "walkin": return Category.TAG_WALKIN;
+            case "firstTag": return Category.FIRST_TAG;
+            case "secongTag": return Category.SECOND_TAG;
             case "publishedon": return Category.PUBLISHED_ON;
             default: throw new RuntimeException("Not implemented yet");
         }
