@@ -5,7 +5,8 @@ import com.naukrimilega.models.NewspaperJobs;
 import com.naukrimilega.service.NewsPaperService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -42,7 +43,7 @@ public class NewsPaperJobsFacade {
   @Path("/{date}")
   @ApiOperation("This API will fetch for a particular date")
   @GET
-  public List<NewspaperJobs> fetchNewsPaperJobsByDate(@PathParam("date") Date date) {
+  public List<NewspaperJobs> fetchNewsPaperJobsByDate(@PathParam("date") String date) {
     return newsPaperService.fetchNewsPaperJobsByDateResponse(date);
   }
 }

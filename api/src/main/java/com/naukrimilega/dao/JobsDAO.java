@@ -58,10 +58,15 @@ public class JobsDAO {
     private Map<FilterParam, Object> prepareParamMapFrom(Category category, String categoryValue) throws Exception {
         Map<FilterParam, Object> qMap = new HashMap<>();
 
-        String categoryVal = category.getActualValue();
-
-        qMap.put(FilterParam.CHILD, categoryVal);
-        qMap.put(FilterParam.START_AT, categoryValue);
+        if(category!=null){
+          String categoryVal  = category.getActualValue();
+            qMap.put(FilterParam.CHILD, categoryVal);
+            qMap.put(FilterParam.START_AT, categoryValue);
+        }
+        else {
+            qMap.put(FilterParam.CHILD, "ALL");
+            qMap.put(FilterParam.START_AT, null);
+        }
 
 //        switch (category) {
 //            case DATE: qMap.put(FilterParam.CHILD, DBConstants.PUBLISHED_ON); break;

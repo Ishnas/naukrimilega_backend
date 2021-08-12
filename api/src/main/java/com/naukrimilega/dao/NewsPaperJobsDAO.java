@@ -8,7 +8,6 @@ import com.naukrimilega.firebaseutil.model.FilterParam;
 import com.naukrimilega.firebaseutil.service.IDatabaseService;
 import com.naukrimilega.models.NewspaperJobs;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,16 +53,15 @@ public class NewsPaperJobsDAO {
     return qMap;
   }
 
-  public List<NewspaperJobs> fetchNewsPaperJobsByDate(String nodeName, Date date) {
+  public List<NewspaperJobs> fetchNewsPaperJobsByDate(String nodeName, String date) {
     Map<FilterParam, Object> qMap = prepareParamMapFromByDate(date);
     return getResultList(nodeName, qMap);
   }
 
-  private Map<FilterParam, Object> prepareParamMapFromByDate(Date date) {
+  private Map<FilterParam, Object> prepareParamMapFromByDate(String date) {
     Map<FilterParam, Object> qMap = new HashMap<>();
     qMap.put(FilterParam.CHILD, "publishedOn");
     qMap.put(FilterParam.EQUAL_TO, date);
-
     return qMap;
   }
 }

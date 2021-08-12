@@ -1,10 +1,11 @@
 package com.naukrimilega.models;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewspaperJobs {
 
   private String id;
@@ -19,5 +20,5 @@ public class NewspaperJobs {
 
   private List<String> results;
 
-  private Date publishedOn;
+  private String publishedOn;
 }

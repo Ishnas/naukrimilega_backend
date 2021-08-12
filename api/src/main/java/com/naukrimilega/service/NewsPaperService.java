@@ -3,8 +3,8 @@ package com.naukrimilega.service;
 import com.google.inject.Inject;
 import com.naukrimilega.dao.NewsPaperJobsDAO;
 import com.naukrimilega.models.NewspaperJobs;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +24,7 @@ public class NewsPaperService {
   public Boolean addNewsPaperJobsDetails(NewspaperJobs newspaperJobs) {
     String nodeName = deriveDailyJobsName();
     newspaperJobs.setId(generateRandomStringForId());
+    newspaperJobs.setPublishedOn(LocalDate.now().toString());
     return newsPaperJobsDAO.addNewsPaperJobs(nodeName, newspaperJobs);
   }
 
@@ -44,7 +45,7 @@ public class NewsPaperService {
     return UUID.randomUUID().toString() + LocalDateTime.now().toString();
   }
 
-  public List<NewspaperJobs> fetchNewsPaperJobsByDateResponse(Date date) {
+  public List<NewspaperJobs> fetchNewsPaperJobsByDateResponse(String date) {
     String nodeName = deriveDailyJobsName();
     return newsPaperJobsDAO.fetchNewsPaperJobsByDate(nodeName, date);
   }

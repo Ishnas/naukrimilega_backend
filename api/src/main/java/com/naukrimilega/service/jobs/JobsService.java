@@ -48,14 +48,6 @@ public class JobsService {
             return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
         }else
             throw new RuntimeException("Not supported fetchJobsResponse()");
-
-//        switch (category) {
-//            case DATE: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
-//            case STATE: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
-//            case TAG_FRESHERS: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
-//            case TAG_GOVT_JOBS: return jobsDAO.fetchJobsBy(nodeName, category, typeValue);
-//            default: throw new RuntimeException("Not supported fetchJobsResponse()");
-//        }
     }
 
     /**
