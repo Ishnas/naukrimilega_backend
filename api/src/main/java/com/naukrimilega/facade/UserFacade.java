@@ -25,13 +25,15 @@ public class UserFacade {
     @ApiOperation("This API will take the job type and return data for that")
     @POST
     public Boolean addUser(UserDetails userDetails) {
+        System.out.println(userDetails);
         return userService.addUser(userDetails);
     }
 
-    @Path("/{email}")
     @ApiOperation("This API will take the job type and return data for that")
     @GET
-    public UserDetails fetchUser(@PathParam("email") String email) {
+    public UserDetails fetchUser() {
+        String email = "shawishita18@gmail.com";
+        System.out.println(email);
         return userService.fetchUser(email);
     }
 }
