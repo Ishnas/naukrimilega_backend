@@ -3,6 +3,7 @@ package com.naukrimilega.service;
 import com.google.inject.Inject;
 import com.naukrimilega.dao.UserDAO;
 import com.naukrimilega.models.UserDetails;
+import java.util.List;
 
 public class UserService {
     private final UserDAO userDAO;

@@ -1,5 +1,7 @@
 package com.naukrimilega.facade;
 
+import com.codahale.metrics.annotation.Timed;
+import com.google.cloud.storage.Acl.User;
 import com.google.inject.Inject;
 import com.naukrimilega.models.JobDetails;
 import com.naukrimilega.models.UserDetails;
@@ -29,11 +31,12 @@ public class UserFacade {
         return userService.addUser(userDetails);
     }
 
-    @ApiOperation("This API will take the job type and return data for that")
+    @Path("/{email}")
+    @ApiOperation("This API will take the email and return data for that")
     @GET
-    public UserDetails fetchUser() {
-        String email = "shawishita18@gmail.com";
-        System.out.println(email);
-        return userService.fetchUser(email);
+    @Timed
+    public String fetchUser(@PathParam("email") String email) {
+        UserDetails userDetails = userService.fetchUser(email);
+        return "authenticated";
     }
 }

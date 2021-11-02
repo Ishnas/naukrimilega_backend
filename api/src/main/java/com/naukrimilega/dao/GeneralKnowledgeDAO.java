@@ -48,9 +48,7 @@ public class GeneralKnowledgeDAO {
 
   private Map<FilterParam, Object> prepareParamMapFrom() {
     Map<FilterParam, Object> qMap = new HashMap<>();
-
     qMap.put(FilterParam.CHILD, "gkType");
-
     return qMap;
   }
 }
