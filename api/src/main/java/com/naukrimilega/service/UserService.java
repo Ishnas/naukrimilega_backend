@@ -35,4 +35,13 @@ public class UserService {
         String nodeName = deriveNodeNameUsers();
         return userDAO.fetchUser(nodeName, email);
     }
+
+    /**
+     * Reset password by matching email id
+     */
+
+    public String resetPassword(String email, String password){
+        String nodeName = deriveNodeNameUsers();
+        return userDAO.resetPassword(nodeName, email, password);
+    }
 }

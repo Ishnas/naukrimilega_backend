@@ -64,4 +64,23 @@ public class UserDAO {
 
         return formatted;
     }
+
+    public String resetPassword(String nodeName, String email, String password) {
+        Map<FilterParam, Object> qMap = prepareParamMapFrom(email);
+
+         Object payload = databaseService.getDataWithFilters(nodeName, FilterByType.CHILD, qMap);
+        System.out.println(payload);
+        HashMap<String, Object> userDetailsMap = new ObjectMapper().convertValue(payload, typeRef);
+        if(userDetailsMap == null || userDetailsMap.isEmpty()){
+            return "Please enter valid email id";
+        }
+        else {
+            for (String key : userDetailsMap.keySet()) {
+                UserDetails userDetails = new ObjectMapper().convertValue(userDetailsMap.get(key), userDetailsTypeReference);
+                userDetails.setPassword(password);
+                databaseService.updateData(nodeName + "/" + key, userDetails);
+            }
+            return "Password changed successfully";
+        }
+    }
 }

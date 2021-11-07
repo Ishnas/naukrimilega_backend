@@ -1,17 +1,15 @@
 package com.naukrimilega.facade;
 
 import com.codahale.metrics.annotation.Timed;
-import com.google.cloud.storage.Acl.User;
 import com.google.inject.Inject;
-import com.naukrimilega.models.JobDetails;
 import com.naukrimilega.models.UserDetails;
 import com.naukrimilega.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import retrofit2.http.Body;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path("/v1/users")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,8 +33,17 @@ public class UserFacade {
     @ApiOperation("This API will take the email and return data for that")
     @GET
     @Timed
-    public String fetchUser(@PathParam("email") String email) {
+    public UserDetails fetchUser(@PathParam("email") String email) {
         UserDetails userDetails = userService.fetchUser(email);
-        return "authenticated";
+        return userDetails;
+    }
+
+    @Path("/resetpassword")
+    @ApiOperation("This API will take the email and return data for that")
+    @POST
+    @Timed
+    public String resetPassword(@Body UserDetails userDetails) {
+        String message = userService.resetPassword(userDetails.getEmail(), userDetails.getPassword());
+        return message;
     }
 }

@@ -20,7 +20,6 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import com.naukrimilega.module.DataManagerModule;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
-
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import java.util.EnumSet;
